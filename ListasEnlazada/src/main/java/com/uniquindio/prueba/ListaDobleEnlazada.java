@@ -1,44 +1,44 @@
 package com.uniquindio.prueba;
 
-public class ListaDobleEnlazada {
+public class ListaDobleEnlazada <T>{
 
-    private NodoDoble head;
-    private NodoDoble tail;
+    private NodoDoble inicio;
+    private NodoDoble fin;
 
     public ListaDobleEnlazada() {
-        this.head = null;
-        this.tail = null;
+        this.inicio = null;
+        this.fin = null;
     }
 
     // Agregar al final
-    public void agregarAlFinal(int dato) {
+    public void agregarAlFinal( T dato) {
         NodoDoble nuevo = new NodoDoble(dato);
 
-        if (head == null) { // lista vacía
-            head = tail = nuevo;
+        if (inicio == null) { // lista vacía
+            inicio = fin = nuevo;
         } else {
-            tail.setProximo(nuevo);
-            nuevo.setAnterior(tail);
-            tail = nuevo;
+            fin.setProximo(nuevo);
+            nuevo.setAnterior(fin);
+            fin = nuevo;
         }
     }
 
     // Agregar al inicio
-    public void agregarAlInicio(int dato) {
+    public void agregarAlInicio(T dato) {
         NodoDoble nuevo = new NodoDoble(dato);
 
-        if (head == null) {
-            head = tail = nuevo;
+        if (inicio == null) {
+            inicio = fin = nuevo;
         } else {
-            nuevo.setProximo(head);
-            head.setAnterior(nuevo);
-            head = nuevo;
+            nuevo.setProximo(inicio);
+            inicio.setAnterior(nuevo);
+            inicio = nuevo;
         }
     }
 
     // Mostrar de inicio a fin
     public void mostrarAdelante() {
-        NodoDoble actual = head;
+        NodoDoble actual = inicio;
         while (actual != null) {
             System.out.print(actual.getDato() + " <-> ");
             actual = actual.getProximo();
@@ -48,7 +48,7 @@ public class ListaDobleEnlazada {
 
     // Mostrar de fin a inicio
     public void mostrarAtras() {
-        NodoDoble actual = tail;
+        NodoDoble actual = fin;
         while (actual != null) {
             System.out.print(actual.getDato() + " <-> ");
             actual = actual.getAnterior();
@@ -57,10 +57,10 @@ public class ListaDobleEnlazada {
     }
 
     // Eliminar un nodo con cierto valor
-    public void eliminarElemento(int dato) {
-        if (head == null) return;
+    public void eliminarElemento(T dato) {
+        if (inicio == null) return;
 
-        NodoDoble actual = head;
+        NodoDoble actual = inicio;
 
         while (actual != null && actual.getDato() != dato) {
             actual = actual.getProximo();
@@ -69,14 +69,14 @@ public class ListaDobleEnlazada {
         if (actual == null) return; // no encontrado
 
         // Caso 1: eliminar head
-        if (actual == head) {
-            head = head.getProximo();
-            if (head != null) head.setAnterior(null);
+        if (actual == inicio) {
+            inicio = inicio.getProximo();
+            if (inicio != null) inicio.setAnterior(null);
         }
         // Caso 2: eliminar tail
-        else if (actual == tail) {
-            tail = tail.getAnterior();
-            if (tail != null) tail.setProximo(null);
+        else if (actual == fin) {
+            fin = fin.getAnterior();
+            if (fin != null) fin.setProximo(null);
         }
         // Caso 3: nodo en el medio
         else {

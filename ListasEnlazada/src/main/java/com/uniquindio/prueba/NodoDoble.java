@@ -1,22 +1,22 @@
 package com.uniquindio.prueba;
 
-public class NodoDoble {
+public class NodoDoble <T> {
 
-    private int dato;
+    private T dato;
     private NodoDoble anterior;
     private NodoDoble proximo;
 
-    public NodoDoble(int dato) {
+    public NodoDoble(T dato) {
         this.dato = dato;
         this.anterior = null;
         this.proximo = null;
     }
 
-    public int getDato() {
+    public  T  getDato() {
         return dato;
     }
 
-    public void setDato(int dato) {
+    public void setDato(T dato) {
         this.dato = dato;
     }
 
