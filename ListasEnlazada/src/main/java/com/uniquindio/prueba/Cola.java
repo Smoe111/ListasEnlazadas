@@ -37,6 +37,19 @@ public class Cola <T>{
         this.tamaño = tamaño;
     }
 
+    public void encolar(T dato) {
+        Nodo<T> nuevo = new Nodo<>(dato);
+
+        if (estaVacia()) {
+            principio = nuevo;
+            fin = nuevo;
+        } else {
+            fin.setProximo(nuevo);
+            fin = nuevo;
+        }
+        tamaño++;
+    }
+
     // Desencolar -> quitar el primero
     public T desencolar() {
         if (estaVacia()) {
