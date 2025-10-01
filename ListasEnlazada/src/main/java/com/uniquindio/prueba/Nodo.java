@@ -1,29 +1,29 @@
 package com.uniquindio.prueba;
 
-public class Nodo {
+public class Nodo<T> {
+    T dato;
+    Nodo<T> proximo;
 
-    int dato;
-    public Nodo proximo;
-
-    public Nodo(int dato){
-
+    public Nodo (T dato){
         this.dato= dato;
-        this.proximo= null;
+        this.proximo = null;
     }
 
-    public int getDato(){
+    public T getDato() {
         return dato;
     }
-    public void setDato(int dato){
-        this.dato= dato;
+
+    public Nodo<T> setDato(T dato) {
+        this.dato = dato;
+        return this;
     }
-    public Nodo getProximo(){
+
+    public Nodo<T> getProximo() {
         return proximo;
     }
-    public void setProximo(Nodo proximo){
-        this.proximo= proximo;
+
+    public Nodo<T> setProximo(Nodo<T> proximo) {
+        this.proximo = proximo;
+        return this;
     }
-
-
-
 }

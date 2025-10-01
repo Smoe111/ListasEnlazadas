@@ -8,21 +8,21 @@ public class Main {
         System.out.println("Lista Simplemente Enlazada ");
         ListaEnlazada listaSimple = new ListaEnlazada();
 
-        listaSimple.agregarElemento(10);
-        listaSimple.agregarElemento(20);
-        listaSimple.agregarElemento(30);
+        listaSimple.insertarPrimero(10);
+        listaSimple.insertarPrimero(20);
+        listaSimple.insertarPrimero(30);
 
         System.out.println("Lista actual:");
         listaSimple.mostrar();
 
-        System.out.println("¿Está el número 20?: " + listaSimple.buscarElemento(20));
-        System.out.println("¿Está el número 40?: " + listaSimple.buscarElemento(40));
+        System.out.println("¿Está el número 20?: " + listaSimple.localizar(20));
+        System.out.println("¿Está el número 40?: " + listaSimple.localizar(40));
 
-        listaSimple.eliminarElemento(20);
+        listaSimple.eliminar(20);
         System.out.println("Lista después de eliminar el 20:");
         listaSimple.mostrar();
 
-        listaSimple.agregarEnPosicionEspecifica(15, 1);
+        listaSimple.insertarEnPosicion(15, 1);
         System.out.println("Lista después de insertar 15 en la posición 1:");
         listaSimple.mostrar();
 
