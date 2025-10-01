@@ -1,6 +1,6 @@
 package com.uniquindio.prueba;
 
-public class BiCola <T>{
+public class BiCola <T> {
 
     // cola bidireccional
 
