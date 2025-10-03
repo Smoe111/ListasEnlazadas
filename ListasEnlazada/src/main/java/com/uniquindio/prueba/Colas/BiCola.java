@@ -1,9 +1,12 @@
-package com.uniquindio.prueba;
+package com.uniquindio.prueba.Colas;
 
-public class BiCola <T> {
+import com.uniquindio.prueba.Nodo;
 
-    // cola bidireccional
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
+public class BiCola <T extends Comparable<T>>{
     private Nodo<T> principio;
     private Nodo<T> fin;
     private int tamaño;
@@ -39,6 +42,19 @@ public class BiCola <T> {
         this.tamaño = tamaño;
     }
 
+    public void encolarInicio(T dato){
+        Nodo<T>nuevo= new Nodo<T>(dato);
+        if(estaVacia()){
+            principio= nuevo;
+            fin= nuevo;
+        }else{
+            nuevo.setProximo(principio);
+            principio=nuevo;
+        }
+        tamaño++;
+    }
+
+
     // Desencolar -> quitar el primero
     public T desencolarInicio() {
         if (estaVacia()) {
@@ -57,9 +73,6 @@ public class BiCola <T> {
         return dato;
     }
 
-    public boolean estaVacia() {
-        return tamaño == 0;
-    }
 
     public void encolarFinal(T dato) {
         Nodo<T> nuevo = new Nodo<>(dato);
@@ -72,19 +85,6 @@ public class BiCola <T> {
             fin = nuevo;
         }
         tamaño++;
-    }
-
-    public void agregarInicio(T dato){
-
-        Nodo<T>  nuevo= new Nodo<T>(dato);
-         if(estaVacia()){
-             principio= nuevo;
-             fin= nuevo;
-         }else{
-             nuevo.setProximo(principio);
-             principio=nuevo;
-         }
-         tamaño++;
     }
 
     public T desencolarFinal() {
@@ -114,5 +114,64 @@ public class BiCola <T> {
         tamaño--;
 
         return dato;
+    }
+
+    //Insertar en posición específica
+    public void insertarEnPosicion(T dato, int posicion) {
+        if (posicion < 0 || posicion > tamaño) {
+            throw new IndexOutOfBoundsException("Posición inválida");
+        }
+
+        if (posicion == 0) {
+            encolarInicio(dato);
+            return;
+        } else if (posicion == tamaño) {
+            encolarFinal(dato);
+            return;
+        }
+
+        Nodo<T> actual = principio;
+        for (int i = 0; i < posicion - 1; i++) {
+            actual = actual.getProximo();
+        }
+
+        Nodo<T> nuevo = new Nodo<>(dato);
+        nuevo.setProximo(actual.getProximo());
+        actual.setProximo(nuevo);
+        tamaño++;
+    }
+
+    //Ordenar ascendente
+    public void ordenarAscendente() {
+        if (estaVacia() || principio.getProximo() == null) return;
+
+        List<T> listaTemp = new ArrayList<>();
+        Nodo<T> actual = principio;
+        while (actual != null) {
+            listaTemp.add(actual.getDato());
+            actual = actual.getProximo();
+        }
+
+        Collections.sort(listaTemp);
+
+        actual = principio;
+        int index = 0;
+        while (actual != null) {
+            actual.setDato(listaTemp.get(index++));
+            actual = actual.getProximo();
+        }
+    }
+
+    public void mostrar() {
+        Nodo<T> actual = principio;
+        while (actual != null) {
+            System.out.print(actual.getDato() + " -> ");
+            actual = actual.getProximo();
+        }
+        System.out.println("null");
+    }
+
+    public boolean estaVacia() {
+        return tamaño == 0;
     }
 }
